@@ -14,4 +14,4 @@ sudo chown -R ubuntu:ubuntu /app
 # tell heroku app what port to listen on
 echo "export PORT=8888" | sudo tee /app/.profile.d/tsuru.sh
 # create a new procfile that uses /start
-LC_ALL=C  perl -lne '/^(.*?):/ && print "$1: /start $1"' /app/Procfile  |sudo tee /Procfile
+# LC_ALL=C  perl -lne '/^(.*?):/ && print "$1: /start $1"' /app/Procfile  |sudo tee /Procfile
