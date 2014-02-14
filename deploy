@@ -11,6 +11,18 @@ git archive --format=tar $2 | sudo /bin/sh -c "rm -rf /app && mkdir /app && tar 
 sudo /build/builder
 # fix the perms
 sudo chown -R ubuntu:ubuntu /app
+sudo cat > /var/lib/tsuru/start <<EOF
+#!/bin/bash -l
+
+source /var/lib/tsuru/config
+export HOME=/app
+for file in \$HOME/.profile.d/*; do source \$file; done
+hash -r
+sudo -E /usr/local/bin/circusd /etc/circus/circus.ini --daemon --log-output /var/log/circus.log
+
+EOF
+chmod +x /var/lib/tsuru/start
+
 # tell heroku app what port to listen on
 export HOME=/app
 export PORT=8888
