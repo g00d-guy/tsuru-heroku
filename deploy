@@ -12,6 +12,13 @@ sudo /build/builder
 # fix the perms
 sudo chown -R ubuntu:ubuntu /app
 # tell heroku app what port to listen on
-echo "export PORT=8888" | sudo tee /app/.profile.d/tsuru.sh
+export HOME=/app
+export PORT=8888
+
+# load profile
+
+for file in $HOME/.profile.d/*; do source $file; done
+
+# echo "export PORT=8888" | sudo tee /app/.profile.d/tsuru.sh
 # create a new procfile that uses /start
 # LC_ALL=C  perl -lne '/^(.*?):/ && print "$1: /start $1"' /app/Procfile  |sudo tee /Procfile
