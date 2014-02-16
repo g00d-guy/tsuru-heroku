@@ -1,4 +1,4 @@
-from    git.bonustab.net:5050/bonustab/buildstep
+from    bonustab/buildstep
 run     wget http://github.com/g00d-guy/basebuilder/tarball/master -O basebuilder.tar.gz --no-check-certificate
 run     mkdir /var/lib/tsuru
 run     tar -xvf basebuilder.tar.gz -C /var/lib/tsuru --strip 1
@@ -10,3 +10,4 @@ run     cp /var/lib/tsuru/base/start /var/lib/tsuru
 run     /var/lib/tsuru/base/install
 run     /var/lib/tsuru/base/setup
 add     circus.ini /etc/circus/circus.ini
+add     resolv.conf /etc/resolv.conf
