@@ -4,8 +4,10 @@ sudo -s <<EOL
   source /var/lib/tsuru/config
   export HOME=/app
   export PORT=8888
-  for file in \$HOME/.profile.d/*; do
-    source \$file;
-  done
+  if [ -d \$HOME/.profile.d/ ]; then
+    for file in \$HOME/.profile.d/*; do
+      source \$file;
+    done
+  fi
   /usr/local/bin/circusd /etc/circus/circus.ini --daemon --log-output /var/log/circus.log
 EOL
